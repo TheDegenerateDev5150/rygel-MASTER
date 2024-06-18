@@ -1,0 +1,2 @@
+variables:
+  FEDORA_BASE_TAG: "2026-06-22.1"
