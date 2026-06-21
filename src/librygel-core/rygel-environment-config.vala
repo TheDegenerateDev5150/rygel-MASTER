@@ -109,7 +109,7 @@ public class Rygel.EnvironmentConfig : GLib.Object, Configuration {
     }
 
     public bool get_enabled (string section) throws GLib.Error {
-        return get_bool (section, ENABLED_KEY);
+        return get_bool_variable_full (get_variable_name (section, ENABLED_KEY));
     }
 
     public string get_title (string section) throws GLib.Error {
@@ -158,7 +158,7 @@ public class Rygel.EnvironmentConfig : GLib.Object, Configuration {
     public bool get_bool (string section,
                           string key)
                           throws GLib.Error {
-        return this.get_bool_variable (get_variable_name (section, key));
+        return this.get_bool_variable_full (get_variable_name (section, key));
     }
 
     private string get_string_variable (string variable) throws GLib.Error {
@@ -183,13 +183,36 @@ public class Rygel.EnvironmentConfig : GLib.Object, Configuration {
 
     // This will return true if the environment variable with the given name is set
     // doesn't matter which value.
-    private bool get_simple_bool_variable (string variable) throws GLib.Error {
+    private bool get_bool_variable (string variable) throws GLib.Error {
         var enabled = Environment.get_variable (variable);
         if (enabled == null) {
             throw new ConfigurationError.NO_VALUE_SET ("No value available");
         }
 
         return true;
+    }
+
+    private bool get_bool_variable_full (string variable) throws GLib.Error {
+        var enabled = Environment.get_variable (variable);
+        if (enabled == null) {
+            throw new ConfigurationError.NO_VALUE_SET ("No value available");
+        }
+
+        bool val;
+        if (bool.try_parse (enabled, out val)) {
+            return val;
+        }
+
+        int result;
+        if (int.try_parse (enabled, out result, null, 10)) {
+            if (result == 0){
+                return false;
+            }
+
+            return true;
+        }
+
+        throw new ConfigurationError.NO_VALUE_SET ("No value available");
     }
 
     private string get_variable_name (string section, string key) {
