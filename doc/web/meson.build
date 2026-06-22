@@ -16,6 +16,7 @@ docs_rst = [
   'system-integration.rst',
   'media-server2.rst',
   'configuration.rst',
+  'environment.rst'
 ]
 
 # Sphinx only allows to specify one source folder

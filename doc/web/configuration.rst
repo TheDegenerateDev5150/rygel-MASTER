@@ -17,7 +17,29 @@ All configuration options are available in all configuration mechanisms.
 Environment variables
 =====================
 
-TBD
+Special environment variables for everything
+--------------------------------------------
+
+.. include:: environment.rst
+
+Generic configuration settings
+------------------------------
+
+It is possible to override all settings using config variables. The pattern here is ``RYGEL_``,
+followed by the name of the plugin in uppercase, followed by the name of the config option with
+``-`` replaced by ``_``.
+
+Examples
+^^^^^^^^
+
+Disabling meta-data extraction in MediaExport
+    ``RYGEL_MEDIAEXPORT_EXTRACT_METADATA=false``
+
+Only allow transcoding to MP3:
+    ``RYGEL_GSTMEDIAENGINE_TRANSCODERS=mp3``
+
+Turn off IPv6 temporarily
+    ``RYGEL_GENERAL_IPV&=0``
 
 Configuration files
 ===================
