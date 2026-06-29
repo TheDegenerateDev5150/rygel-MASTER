@@ -39,7 +39,7 @@ Only allow transcoding to MP3:
     ``RYGEL_GSTMEDIAENGINE_TRANSCODERS=mp3``
 
 Turn off IPv6 temporarily
-    ``RYGEL_GENERAL_IPV&=0``
+    ``RYGEL_GENERAL_IPV6=0``
 
 Configuration files
 ===================
