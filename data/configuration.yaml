@@ -266,8 +266,8 @@
     is provided by Rygel.
 
     Available items have to be declared using the "launch-items" setting. Each pipeline then needs
-    to be configured for the three values of "launch", "mime", and "title". For example, given the
-    setting of ``launuch-items=audio;video`` it is necessary to also define triplets of
+    to be configured for the three values of "launch", "mime" and "title", and optionally for "dlnaprofile".
+    For example, given the setting of ``launuch-items=audio;video`` it is necessary to also define triplets of
     ``audio-title``, ``audio-mime``, ``audio-launch`` and ``video-title``, ``video-mime`` and
     ``video-launch``.
   values:
