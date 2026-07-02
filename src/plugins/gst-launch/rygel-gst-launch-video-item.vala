@@ -25,11 +25,12 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  */
 
+using GUPnP;
+
 /**
  * Video item that serves data from a gst-launch commandline.
  */
 public class Rygel.GstLaunch.VideoItem : Rygel.VideoItem {
-
     public VideoItem (string         id,
                       MediaContainer parent,
                       string         title,
