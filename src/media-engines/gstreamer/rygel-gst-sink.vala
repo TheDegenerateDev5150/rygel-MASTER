@@ -69,7 +69,8 @@ internal class Rygel.GstSink : Sink {
         this.frozen = false;
 
         if (this.offsets != null && this.offsets is HTTPByteSeekRequest) {
-            this.max_bytes = ((HTTPByteSeekRequest) this.offsets).total_size;
+            var byte_req = (HTTPByteSeekRequest) this.offsets;
+            this.max_bytes = byte_req.range_length;
             if (this.max_bytes == -1) {
                 this.max_bytes = int64.MAX;
             }

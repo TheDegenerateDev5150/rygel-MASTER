@@ -86,6 +86,40 @@ public class Rygel.HTTPByteSeekRequest : Rygel.HTTPSeekRequest {
 
         var range_tokens = parsed_range.split ("-", 2);
 
+        if (range_tokens[0].length == 0) {
+            // Suffix range: "bytes=-N" — request for the last N bytes
+            if (range_tokens[1] == null) {
+                throw new HTTPSeekRequestError.INVALID_RANGE
+                              ("Invalid Range request with no values: '%s'", range);
+            }
+
+            int64 suffix_length;
+            if (!int64.try_parse (range_tokens[1], out suffix_length, null, 10)) {
+                throw new HTTPSeekRequestError.INVALID_RANGE
+                              ("Invalid Range suffix length value: '%s'", range);
+            }
+
+            if (total_size != UNSPECIFIED) {
+                if (suffix_length >= total_size) {
+                    start_byte = 0;
+                } else {
+                    start_byte = total_size - suffix_length;
+                }
+                end_byte = total_size - 1;
+                range_length = end_byte - start_byte + 1;
+            } else {
+                start_byte = UNSPECIFIED;
+                end_byte = UNSPECIFIED;
+                range_length = UNSPECIFIED;
+            }
+
+            this.start_byte = start_byte;
+            this.end_byte = end_byte;
+            this.total_size = total_size;
+
+            return;
+        }
+
         if (!int64.try_parse (range_tokens[0], out start_byte, null, 10)) {
             throw new HTTPSeekRequestError.INVALID_RANGE
                           ("Invalid Range start value: '%s'", range);
