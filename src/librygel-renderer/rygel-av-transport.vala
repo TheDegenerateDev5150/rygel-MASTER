@@ -838,6 +838,18 @@ internal class Rygel.AVTransport : Service {
         }
 
         var new_uri = this.context.rewrite_uri (uri);
+
+        if (new_uri == null) {
+            // TRANSLATORS: first %s is a URI, the second an explanaition of
+            // the error
+            warning (_("Failed to access resource at %s: Address family mismatch."),
+                    uri);
+
+            action.return_error (716, _("Resource not found"));
+
+            return;
+        }
+
         var message = new Message ("HEAD", new_uri);
         message.request_headers.append ("getContentFeatures.dlna.org",
                                         "1");
