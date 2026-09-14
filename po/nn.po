@@ -1202,7 +1202,7 @@ msgstr "Kan ikkje fjerne behaldarar i %s"
 #: src/plugins/media-export/rygel-media-export-playlist-root-container.vala:43
 #: src/plugins/media-export/rygel-media-export-root-container.vala:612
 msgid "Playlists"
-msgstr "Spelelistar"
+msgstr "Spelelister"
 
 #: src/plugins/media-export/rygel-media-export-playlist-root-container.vala:83
 #, c-format
@@ -1325,7 +1325,7 @@ msgstr "Album"
 
 #: src/plugins/localsearch/localsearch-artists.vala:31
 msgid "Artists"
-msgstr "Kunstnarar"
+msgstr "Artistar"
 
 #: src/plugins/localsearch/localsearch-category-all-container.vala:56
 #, c-format
